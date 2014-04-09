@@ -1,47 +1,70 @@
-# generator-firepit [![Build Status](https://secure.travis-ci.org/itsthatguy/generator-firepit.png?branch=master)](https://travis-ci.org/itsthatguy/generator-firepit)
+# generator-firepit
 
-> [Yeoman](http://yeoman.io) generator
+### Includes
+* Node
+* Express
+* Bower
+  * jQuery
+  * Ember
+  * Handlebars
+* Gulp
+* Browserify
+* Stylus
+* Coffeescript
 
 
 ## Getting Started
 
-### What is Yeoman?
+Firepit is a Node static site starter project Yeoman Generator. The only reason I say that it is a static site starter project is because it doesn't start out serving anything other than static assets. If you want to add that on, go for it. This is a normal node stack after all.
 
-Trick question. It's not a thing. It's this guy:
 
-![](http://i.imgur.com/JHaAlBJ.png)
-
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
-
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+### Install yeoman
 
 ```
-$ npm install -g yo
+npm install -g yo
 ```
 
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-firepit from npm, run:
+### Clone this repo
 
 ```
-$ npm install -g generator-firepit
+git clone git@github.com:itsthatguy/generator-firepit.git
 ```
 
-Finally, initiate the generator:
+### Link it!
+
+Before you can use the generator, npm will need to know where it is. Use the following commands to set that up.
 
 ```
-$ yo firepit
+cd generator-firepit
+npm link
 ```
 
-### Getting To Know Yeoman
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
+## Using the generator
+*NOTE: I'm assuming you are still in the generator-firepit directory right now.*
 
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+Replace `myproject` with whatever you want to name your project.
+
+```
+cd ..
+mkdir myproject && cd $_
+yo firepit
+```
 
 
-## License
+## Now what? Up and Running
 
-MIT
+### Running
+
+1. Run the server: `npm start`
+2. Browse to: `http://localhost:3002`
+
+Assets will automatically be compiled, while the server is running. So all you need to do it run `npm start`.
+
+
+### Deploying to heroku
+
+1. Create your heroku instance `heroku create`
+2. Deploy `git push heroku master`
+3. Dance.
+
