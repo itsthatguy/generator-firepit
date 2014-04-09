@@ -1,4 +1,4 @@
-# generator-firepit
+# Firepit
 
 ### Includes
 * Node
