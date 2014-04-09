@@ -25,5 +25,5 @@ var runCommand = function(command, args) {
 }
 
 
-runCommand("bower", ['install']);
-runCommand("gulp");
+runCommand("coffee", ['app.coffee']);
+runCommand("gulp", ['watch']);

@@ -8,8 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/coffee app.coffee && npm run watch",
-    "watch": "./node_modules/.bin/gulp watch",
+    "start": "node start.js",
     "postinstall": "node postinstall.js"
   },
   "author": "",
@@ -27,7 +26,8 @@
     "gulp-stylus": "^0.1.0",
     "gulp-util": "^2.2.14",
     "coffeeify": "^0.6.0",
-    "stylus": "^0.42.3"
+    "stylus": "^0.42.3",
+    "win-spawn": "^2.0.0"
   },
   "repository": {
     "type": "git",
