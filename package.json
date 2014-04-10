@@ -14,7 +14,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "coffee --bare --compile --watch --no-header app/index.coffee "
   },
   "files": [
     "app"
