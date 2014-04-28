@@ -8,6 +8,7 @@
   * Ember
   * Handlebars
 * Gulp
+* Livereload
 * Browserify
 * Stylus
 * Coffeescript
