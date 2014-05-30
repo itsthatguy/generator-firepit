@@ -35,4 +35,7 @@ var runCommand = function(command, args) {
 }
 
 runCommand("coffee", ['app.coffee']);
-runCommand("gulp", ['watch']);
+if (process.env.ENVIRONMENT != "PRODUCTION") {
+  runCommand("gulp", ['watch']);
+}
+
