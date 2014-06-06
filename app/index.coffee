@@ -23,6 +23,17 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
       message: 'What is the name of your project?'
       default: 'Firepit'
 
+    @prompts.push
+      name: 'packages'
+      type: 'checkbox'
+      message: 'Select starter packages?'
+      choices: [
+        "jquery"
+        "ember"
+        "handlebars"
+      ]
+      default: ["jquery"]
+
     @prompt @prompts, ((props) ->
       @props = props
       done()
@@ -30,17 +41,45 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
 
 
   projectfiles: ->
+    @packagesPaths = {
+      "jquery"     : "/jquery/dist/jquery.min.js"
+      "ember"      : "/ember/ember.js"
+      "handlebars" : "/handlebars/handlebars.js"
+    }
+
+    bowerPackageList = {
+      "ember": '"ember": "~1.5.0"'
+      "jquery": '"jquery": "~2.1.0"'
+      "handlebars": '"handlebars": "~1.3.0"'
+    }
+
+    @bowerPackages = ""
+
+    for key, value of @props.packages
+      comma = if (parseInt(key) == @props.packages.length-1) then '' else ',\n    '
+      @bowerPackages += bowerPackageList[value] + comma
+
+    # Root App files
     @template('_README.md', 'README.md')
     @template('_Gulpfile.js', 'Gulpfile.js')
     @template('_package.json', 'package.json')
     @template('_bower.json', 'bower.json')
-    @directory('app/', 'app/')
-    @template('_index.html', 'app/index.html')
     @copy('.gitignore', '.gitignore')
     @copy('Procfile', 'Procfile')
     @copy('start.js', 'start.js')
     @copy('postinstall.js', 'postinstall.js')
     @copy('app.coffee', 'app.coffee')
+
+    # Front-end app files
+    @mkdir('app/')
+    @mkdir('app/css/')
+    @mkdir('app/js/')
+    @mkdir('app/img/')
+    @mkdir('app/fonts/')
+    @template('app/_index.html', 'app/index.html')
+    @template('app/css/_main.styl', 'app/css/main.styl')
+    @template('app/js/_app.coffee', 'app/js/app.coffee')
+
 
   dependencies: ->
     @.on 'end', ->
