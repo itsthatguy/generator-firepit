@@ -136,7 +136,7 @@ gulp.task('clean', function() {
 gulp.task('watch', ['clean','stylus','coffee','assets','ejs'], function() {
   gulp.watch(watchPaths.css, ['stylus']);
   gulp.watch(watchPaths.coffee, ['coffee']);
-  gulp.watch(watchPaths.assetsPaths, ['assets']);
+  gulp.watch(watchPaths.assets, ['assets']);
   gulp.watch(watchPaths.ejs, ['ejs']);
   if (livereload) {
     var server = livereload();

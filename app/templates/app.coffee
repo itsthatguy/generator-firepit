@@ -17,7 +17,7 @@ app.configure ->
 port = process.env.PORT || 3002
 webserver.listen(port)
 
-app.get '/', (req, res) ->
+app.get '/:path.:ext', (req, res) ->
   res.render(basePath + '/.generated/index.html')
 
 module.exports = webserver
