@@ -34,8 +34,11 @@ var runCommand = function(command, args) {
   });
 }
 
-runCommand("coffee", ['app.coffee']);
+
 if (process.env.ENVIRONMENT != "PRODUCTION") {
+  runCommand("nodemon", ['app.coffee']);
   runCommand("gulp", ['watch']);
+} else {
+  runCommand("coffee", ['app.coffee']);
 }
 
