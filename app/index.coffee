@@ -33,11 +33,29 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
         "handlebars"
       ]
       default: ["jquery"]
+      filter: (input) ->
+
+        dependencies =
+          "ember": "handlebars"
+
+        foundKey = {}
+        foundValue = {}
+        for choice, i in input
+          foundKey[choice] = dependencies[choice]?
+          foundValue[choice] = dependencies[choice] != choice
+
+        for key, value of dependencies
+          if foundKey[key] and not foundValue[value]
+            input.push value
+        return input
+
 
     @prompt @prompts, ((props) ->
       @props = props
       done()
     ).bind(@)
+
+  checkDependencies: (obj, deps) ->
 
 
   projectfiles: ->
@@ -87,7 +105,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
         callback: => @emit('dependenciesInstalled')
 
     @.on 'dependenciesInstalled', ->
-      @log chalk.magenta("\n# Awesome. Everything generated just fine!\n\n\
+      @log chalk.green("\n# Awesome. Everything generated just fine!\n\n\
         \t[Getting Started]\n\
         \t* Running the server:    npm start\n\
         \t* View in browser:       http://localhost:3002/")

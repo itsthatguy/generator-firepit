@@ -30,13 +30,34 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
       type: 'checkbox',
       message: 'Select starter packages?',
       choices: ["jquery", "ember", "handlebars"],
-      "default": ["jquery"]
+      "default": ["jquery"],
+      filter: function(input) {
+        var choice, dependencies, foundKey, foundValue, i, key, value, _i, _len;
+        dependencies = {
+          "ember": "handlebars"
+        };
+        foundKey = {};
+        foundValue = {};
+        for (i = _i = 0, _len = input.length; _i < _len; i = ++_i) {
+          choice = input[i];
+          foundKey[choice] = dependencies[choice] != null;
+          foundValue[choice] = dependencies[choice] !== choice;
+        }
+        for (key in dependencies) {
+          value = dependencies[key];
+          if (foundKey[key] && !foundValue[value]) {
+            input.push(value);
+          }
+        }
+        return input;
+      }
     });
     return this.prompt(this.prompts, (function(props) {
       this.props = props;
       return done();
     }).bind(this));
   },
+  checkDependencies: function(obj, deps) {},
   projectfiles: function() {
     var bowerPackageList, comma, key, value, _ref;
     this.packagesPaths = {
@@ -85,7 +106,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
       });
     });
     return this.on('dependenciesInstalled', function() {
-      return this.log(chalk.magenta("\n# Awesome. Everything generated just fine!\n\n\t[Getting Started]\n\t* Running the server:    npm start\n\t* View in browser:       http://localhost:3002/"));
+      return this.log(chalk.green("\n# Awesome. Everything generated just fine!\n\n\t[Getting Started]\n\t* Running the server:    npm start\n\t* View in browser:       http://localhost:3002/"));
     });
   }
 });
