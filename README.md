@@ -12,6 +12,7 @@
 * Browserify
 * Stylus
 * Coffeescript
+* nodemon
 
 
 ## Getting Started
