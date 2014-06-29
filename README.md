@@ -26,23 +26,13 @@ Firepit is a Node static site starter project Yeoman Generator. The only reason 
 npm install -g yo
 ```
 
-### Clone this repo
-
+### Install Firepit!
 ```
-git clone git@github.com:itsthatguy/generator-firepit.git
-```
-
-### Link it!
-
-Before you can use the generator, npm will need to know where it is. Use the following commands to set that up.
-
-```
-cd generator-firepit
-npm link
+npm install -g generator-firepit
 ```
 
 
-## Using the generator
+## Using Firepit
 *NOTE: I'm assuming you are still in the generator-firepit directory right now.*
 
 Replace `myproject` with whatever you want to name your project.
