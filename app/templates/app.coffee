@@ -10,9 +10,8 @@ basePath = path.join(__dirname)
 
 app.engine('html', require('ejs').renderFile)
 
-app.configure ->
-  app.use('/assets', express.static(basePath + '/.generated/'))
-  app.use('/vendor', express.static(basePath + '/bower_components/'))
+app.use('/assets', express.static(basePath + '/.generated/'))
+app.use('/vendor', express.static(basePath + '/bower_components/'))
 
 port = process.env.PORT || 3002
 webserver.listen(port)

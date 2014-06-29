@@ -9,7 +9,7 @@ var gulp       = require('gulp'),
     ejs        = require("gulp-ejs"),
     path       = require("path");
 
-if (process.env.ENVIRONMENT != "PRODUCTION") {
+if (process.env.FIREPIT_ENVIRONMENT == "DEVELOPMENT") {
   livereload = require('gulp-livereload');
 }
 
