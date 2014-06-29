@@ -158,7 +158,7 @@ gulp.task('watch', ['watch-pre-tasks'], function(callback) {
     .on('error', gutil.log)
     .on('error', gutil.beep);
   if (livereload) {
-    livereload.listen();
+    livereload.listen({silent: true});
     gulp.watch(path.join(baseStaticPath, '**')).on('change', livereload.changed);
   }
 
