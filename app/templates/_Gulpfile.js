@@ -125,7 +125,7 @@ gulp.task('assets', function() {
 
 
 //
-// clean
+// Clean
 //
 
 gulp.task('clean', function() {
@@ -138,8 +138,9 @@ gulp.task('clean', function() {
 //
 
 gulp.task('watch-pre-tasks', function(callback) {
-  runSequence('clean','coffee', ['stylus','assets','ejs'], callback);
+  runSequence('clean', ['coffee','stylus','assets','ejs'], callback);
 });
+
 
 //
 // Watch
