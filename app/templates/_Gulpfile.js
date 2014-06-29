@@ -2,7 +2,6 @@
 // Require the needed packages
 var gulp        = require('gulp'),
     browserify  = require('gulp-browserify'),
-    clean       = require('gulp-rimraf'),
     ejs         = require("gulp-ejs"),
     gutil       = require('gulp-util'),
     rename      = require('gulp-rename'),
