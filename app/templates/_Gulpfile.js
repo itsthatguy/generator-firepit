@@ -85,16 +85,15 @@ gulp.task('stylus', function () {
 //
 
 gulp.task('coffee', function() {
-  return gulp.src(paths.coffeeInput)
+  return gulp.src(paths.coffeeInput, { read: false })
     .pipe(browserify({
       basedir: __dirname,
       transform: ['coffeeify'],
-      extensions: ['.coffee']})
-        .pipe(rename('app.js')))
-      .on('error', gutil.log)
-      .on('error', gutil.beep)
+      extensions: ['.coffee']
+    }).on('error', gutil.log)
+      .on('error', gutil.beep))
+    .pipe(rename('app.js'))
     .pipe(gulp.dest(paths.coffeeOutput));
-
 });
 
 
