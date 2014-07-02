@@ -30,6 +30,7 @@
     "gulp-util": "^2.2.14",
     "media-typer": "^0.2.0",
     "stylus": "^0.42.3",
+    "nodemon": "^1.2.0",
     "win-spawn": "^2.0.0"
   },
   "repository": {
@@ -37,7 +38,6 @@
     "url": "https://github.com/itsthatguy/firepit.git"
   },
   "devDependencies": {
-    "nodemon": "^1.2.0",
     "run-sequence": "^0.3.6"
   }
 }

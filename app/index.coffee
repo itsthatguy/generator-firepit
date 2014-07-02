@@ -83,6 +83,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @template('_package.json', 'package.json')
     @template('_bower.json', 'bower.json')
     @copy('.gitignore', '.gitignore')
+    @copy('.env', '.env')
     @copy('Procfile', 'Procfile')
     @copy('start.js', 'start.js')
     @copy('nodemon.js', 'nodemon.js')

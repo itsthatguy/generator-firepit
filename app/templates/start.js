@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+// Environment Variables!
+var dotenv = require('dotenv');
+dotenv.load()
+
 var util = require("util");
 var path = require('path');
 var spawn = require('win-spawn');
@@ -35,10 +39,11 @@ var runCommand = function(command, args) {
 }
 
 
-if (process.env.ENVIRONMENT != "PRODUCTION") {
-  runCommand("nodemon", ['app.coffee']);
-  runCommand("gulp", ['watch']);
-} else {
-  runCommand("coffee", ['app.coffee']);
-}
+console.log(">> NODE_ENV: " + process.env.NODE_ENV);
 
+runCommand("coffee", ['app.coffee']);
+if (process.env.NODE_ENV == "development") {
+  runCommand("gulp", ['watch-pre-tasks'], function() {
+    runCommand("gulp", ['watch']);
+  });
+}

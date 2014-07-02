@@ -1,5 +1,9 @@
 {
-  "watch": ["lib/**/*", "app.coffee"],
+  "watch": [
+    "data/**/*",
+    "lib/**/*",
+    "app.coffee"
+  ],
   "ignore": [
     "app/**/*",
     ".generated/**/*",

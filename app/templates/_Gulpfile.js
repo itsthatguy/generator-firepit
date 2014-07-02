@@ -1,17 +1,23 @@
+// Environment Variables!
+var dotenv = require('dotenv');
+dotenv.load();
+
 // Gulpfile.js
 // Require the needed packages
-var gulp        = require('gulp'),
-    browserify  = require('gulp-browserify'),
-    ejs         = require("gulp-ejs"),
-    gutil       = require('gulp-util'),
-    rename      = require('gulp-rename'),
-    stylus      = require('gulp-stylus'),
-    del         = require('del'),
-    path        = require("path"),
-    runSequence = require('run-sequence');
+var gulp         = require('gulp'),
+    ejs          = require('gulp-ejs'),
+    gutil        = require('gulp-util'),
+    rename       = require('gulp-rename'),
+    stylus       = require('gulp-stylus'),
+    browserify   = require('gulp-browserify'),
+    path         = require('path');
 
-if (process.env.ENVIRONMENT != "PRODUCTION") {
-  livereload = require('gulp-livereload');
+// var del, livereload, runSequence;
+
+if (process.env.NODE_ENV == "development") {
+  del         = require('del'),
+  livereload  = require('gulp-livereload'),
+  runSequence = require('run-sequence');
 }
 
 var baseAppPath = path.join(__dirname, 'app'),
@@ -157,8 +163,12 @@ gulp.task('watch', ['watch-pre-tasks'], function(callback) {
     .on('error', gutil.log)
     .on('error', gutil.beep);
   if (livereload) {
-    livereload.listen({silent: true});
-    gulp.watch(path.join(baseStaticPath, '**')).on('change', livereload.changed);
+    var server = livereload.listen({ silent: true });
+    if (server) { gutil.log('[LiveReload] Now listening on port ' + server.port); }
+    gulp.watch(path.join(baseStaticPath, '**'))
+      .on('error', gutil.log)
+      .on('error', gutil.beep)
+      .on('change', livereload.changed);
   }
 
 });

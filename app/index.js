@@ -82,6 +82,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
     this.template('_package.json', 'package.json');
     this.template('_bower.json', 'bower.json');
     this.copy('.gitignore', '.gitignore');
+    this.copy('.env', '.env');
     this.copy('Procfile', 'Procfile');
     this.copy('start.js', 'start.js');
     this.copy('nodemon.js', 'nodemon.js');
