@@ -1,6 +1,6 @@
 {
   "name": "generator-firepit",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Node static site starter project generator",
   "license": "MIT",
   "main": "app/index.js",
