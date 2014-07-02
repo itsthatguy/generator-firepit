@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-// Environment Variables!
-var dotenv = require('dotenv');
-dotenv.load()
-
 var path  = require('path'),
     spawn = require('win-spawn');
 
