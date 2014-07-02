@@ -88,7 +88,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
     this.copy('nodemon.json', 'nodemon.json');
     this.copy('postinstall.js', 'postinstall.js');
     this.mkdir('lib/');
-    this.copy('lib/app.coffee', 'lib/app.coffee');
+    this.copy('app.coffee', 'app.coffee');
     this.copy('lib/webserver.coffee', 'lib/webserver.coffee');
     this.mkdir('app/');
     this.mkdir('app/css/');

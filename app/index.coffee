@@ -89,7 +89,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @copy('nodemon.json', 'nodemon.json')
     @copy('postinstall.js', 'postinstall.js')
     @mkdir('lib/')
-    @copy('lib/app.coffee', 'lib/app.coffee')
+    @copy('app.coffee', 'app.coffee')
     @copy('lib/webserver.coffee', 'lib/webserver.coffee')
 
     # Front-end app files
