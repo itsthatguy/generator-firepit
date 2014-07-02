@@ -12,7 +12,7 @@ var gulp         = require('gulp'),
     browserify   = require('gulp-browserify'),
     path         = require('path');
 
-// var del, livereload, runSequence;
+var del, livereload, runSequence;
 
 if (process.env.NODE_ENV == "development") {
   del         = require('del'),
@@ -129,7 +129,7 @@ gulp.task('assets', function() {
 
 
 //
-// Clean
+// clean
 //
 
 gulp.task('clean', function() {
@@ -142,14 +142,14 @@ gulp.task('clean', function() {
 //
 
 gulp.task('watch-pre-tasks', function(callback) {
-  runSequence('clean', ['coffee','stylus','assets','ejs'], callback);
+  runSequence('clean', ['coffee', 'stylus', 'assets', 'ejs'], callback);
 });
-
 
 //
 // Watch
 //
-gulp.task('watch', ['watch-pre-tasks'], function(callback) {
+gulp.task('watch', function(callback) {
+
   gulp.watch(watchPaths.css, ['stylus'])
     .on('error', gutil.log)
     .on('error', gutil.beep);
@@ -162,15 +162,18 @@ gulp.task('watch', ['watch-pre-tasks'], function(callback) {
   gulp.watch(watchPaths.ejs, ['ejs'])
     .on('error', gutil.log)
     .on('error', gutil.beep);
+
   if (livereload) {
     var server = livereload.listen({ silent: true });
-    if (server) { gutil.log('[LiveReload] Now listening on port ' + server.port); }
+    if (server) {
+      gutil.log('[LiveReload] Now listening on port: ' + server.port);
+      livereload.changed();
+    }
     gulp.watch(path.join(baseStaticPath, '**'))
       .on('error', gutil.log)
       .on('error', gutil.beep)
       .on('change', livereload.changed);
   }
-
 });
 
 gulp.task('default', ['stylus', 'coffee', 'assets', 'ejs']);
