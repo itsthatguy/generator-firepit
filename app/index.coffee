@@ -98,6 +98,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @mkdir('app/js/')
     @mkdir('app/img/')
     @mkdir('app/fonts/')
+    @copy('app/favicon.ico', 'app/favicon.ico')
     @template('app/_index.html', 'app/index.html')
     @template('app/css/_main.styl', 'app/css/main.styl')
     @template('app/js/_app.coffee', 'app/js/app.coffee')
