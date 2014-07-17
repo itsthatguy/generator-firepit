@@ -29,8 +29,8 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
       message: 'Select starter packages?'
       choices: [
         "jquery"
-        "ember"
         "handlebars"
+        "ember"
       ]
       default: ["jquery"]
       filter: (input) ->
