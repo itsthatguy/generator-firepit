@@ -7,17 +7,21 @@ dotenv.load();
 var gulp         = require('gulp'),
     ejs          = require('gulp-ejs'),
     gutil        = require('gulp-util'),
+    jade         = require('gulp-jade'),
     rename       = require('gulp-rename'),
     stylus       = require('gulp-stylus'),
     browserify   = require('gulp-browserify'),
-    path         = require('path');
+    path         = require('path'),
+    marked       = require('marked'),
+    colors       = require('colors');
 
 var del, livereload, runSequence;
 
 if (process.env.NODE_ENV == "development") {
   del         = require('del'),
   livereload  = require('gulp-livereload'),
-  runSequence = require('run-sequence');
+  runSequence = require('run-sequence'),
+  findPort    = require('find-port');
 }
 
 var baseAppPath = path.join(__dirname, 'app'),
@@ -32,6 +36,7 @@ var paths = {
   coffeeOutput: path.join(baseStaticPath, 'js'),
   cleanPath: path.join(baseStaticPath, '**', '*'),
   ejsPath:  [path.join(baseAppPath, '**', '*.ejs')],
+  jadePath:  [path.join(baseAppPath, '**', '*.jade')],
   assetsBasePath: baseAppPath,
   assetsPaths: [
     path.join(baseAppPath, 'img', '**', '*'),
@@ -48,7 +53,8 @@ var watchPaths = {
   ],
   coffee: [path.join(baseJsPath, '**', '*.coffee')],
   assets: paths.assetsPaths,
-  ejs: paths.ejsPath
+  ejs: paths.ejsPath,
+  jade: paths.jadePath
 }
 
 var testFiles = [
@@ -103,6 +109,18 @@ gulp.task('coffee', function() {
 });
 
 
+
+//
+// jade
+//
+
+gulp.task('jade', function() {
+  return gulp.src(paths.jadePath)
+    .pipe(jade({ pretty: true }))
+    .pipe(gulp.dest(paths.assetsOutput))
+});
+
+
 //
 // EJS
 //
@@ -142,7 +160,7 @@ gulp.task('clean', function() {
 //
 
 gulp.task('watch-pre-tasks', function(callback) {
-  runSequence('clean', ['coffee', 'stylus', 'assets', 'ejs'], callback);
+  runSequence('clean', ['coffee', 'stylus', 'assets', 'ejs', 'jade'], callback);
 });
 
 //
@@ -162,18 +180,32 @@ gulp.task('watch', function(callback) {
   gulp.watch(watchPaths.ejs, ['ejs'])
     .on('error', gutil.log)
     .on('error', gutil.beep);
+  gulp.watch(watchPaths.jade, ['jade'])
+    .on('error', gutil.log)
+    .on('error', gutil.beep);
 
   if (livereload) {
-    var server = livereload.listen({ silent: true });
-    if (server) {
-      gutil.log('[LiveReload] Now listening on port: ' + server.port);
-      livereload.changed();
-    }
-    gulp.watch(path.join(baseStaticPath, '**'))
-      .on('error', gutil.log)
-      .on('error', gutil.beep)
-      .on('change', livereload.changed);
+    findPort([35729], function(ports) {
+
+      if (ports.length > 0) {
+
+        var server = livereload.listen({ silent: true });
+        if (server) {
+          var msg = "[LiveReload] Now listening on port: " + server.port;
+          gutil.log(msg.green);
+          livereload.changed();
+        }
+        gulp.watch(path.join(baseStaticPath, '**'))
+          .on('error', gutil.log)
+          .on('error', gutil.beep)
+          .on('change', livereload.changed);
+
+      } else {
+        gutil.log("[LiveReload] Can't start LiveReload => ALREADY RUNNING".red);
+      }
+
+    });
   }
 });
 
-gulp.task('default', ['stylus', 'coffee', 'assets', 'ejs']);
+gulp.task('default', ['stylus', 'coffee', 'assets', 'ejs', 'jade']);
