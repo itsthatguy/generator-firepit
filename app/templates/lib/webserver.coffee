@@ -1,10 +1,22 @@
 
-http     = require('http')
-express  = require('express')
-path     = require('path')
-favicon  = require('serve-favicon')
-findPort = require('find-port')
-colors   = require('colors')
+http      = require('http')
+express   = require('express')
+path      = require('path')
+favicon   = require('serve-favicon')
+findPort  = require('find-port')
+colors    = require('colors')
+basicAuth = require('basic-auth-connect')
+fs        = require('fs')
+yaml      = require('js-yaml')
+
+# Function to load files from our data folder
+getDataFile = (file) ->
+  console.log file
+  try
+    filepath = path.join(basePath, 'data', file)
+    doc = yaml.safeLoad(fs.readFileSync(filepath, 'utf8'))
+  catch err
+    console.log(err)
 
 app           = express()
 webserver     = http.createServer(app)
@@ -12,6 +24,13 @@ basePath      = path.join(__dirname, '..')
 generatedPath = path.join(basePath, '.generated')
 vendorPath    = path.join(basePath, 'bower_components')
 faviconPath   = path.join(basePath, 'app', 'favicon.ico')
+
+# Get our data file
+config       = getDataFile('config.yaml')
+
+# Use Basic Auth?
+if config.username? || config.password?
+  app.use(basicAuth(config.username, config.password)) if process.env.DYNO?
 
 # Configure the express server
 app.engine('.html', require('hbs').__express)
@@ -32,7 +51,9 @@ webserver.on 'listening', ->
   console.log "[Firepit] Server running at http://#{address.address}:#{address.port}".green
 
 # Routes
-app.get '/', (req, res) -> res.render(generatedPath + '/index.html')
+app.get '/', (req, res) ->
+  console.log "weddingParty: ", weddingParty
+  res.render(generatedPath + '/index.html', {data: config, weddingParty: weddingParty})
 
 app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
   path = req.params[0]
