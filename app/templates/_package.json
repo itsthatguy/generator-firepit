@@ -39,7 +39,7 @@
     "serve-favicon": "^2.0.1",
     "stylus": "^0.42.3",
     "win-spawn": "^2.0.0",
-    "run-command": "^0.1.2"
+    "run-command": "^0.1.4"
   },
   "repository": {
     "type": "git",
