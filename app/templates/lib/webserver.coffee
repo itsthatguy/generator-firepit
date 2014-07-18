@@ -11,10 +11,9 @@ yaml      = require('js-yaml')
 
 # Function to load files from our data folder
 getDataFile = (file) ->
-  console.log file
   try
     filepath = path.join(basePath, 'data', file)
-    doc = yaml.safeLoad(fs.readFileSync(filepath, 'utf8'))
+    doc = yaml.safeLoad(fs.readFileSync(filepath, 'utf8')) or {}
   catch err
     console.log(err)
 
