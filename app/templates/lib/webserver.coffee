@@ -51,8 +51,7 @@ webserver.on 'listening', ->
 
 # Routes
 app.get '/', (req, res) ->
-  console.log "weddingParty: ", weddingParty
-  res.render(generatedPath + '/index.html', {data: config, weddingParty: weddingParty})
+  res.render(generatedPath + '/index.html', {data: config})
 
 app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
   path = req.params[0]
