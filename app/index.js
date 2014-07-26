@@ -29,7 +29,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
       name: 'packages',
       type: 'checkbox',
       message: 'Select starter packages?',
-      choices: ["jquery", "ember", "handlebars"],
+      choices: ["jquery", "handlebars", "ember"],
       "default": ["jquery"],
       filter: function(input) {
         var choice, dependencies, foundKey, foundValue, i, key, value, _i, _len;
@@ -87,6 +87,8 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
     this.copy('start.js', 'start.js');
     this.copy('nodemon.json', 'nodemon.json');
     this.copy('postinstall.js', 'postinstall.js');
+    this.mkdir('data/');
+    this.copy('data/config.yaml', 'data/config.yaml');
     this.mkdir('lib/');
     this.copy('app.coffee', 'app.coffee');
     this.copy('lib/webserver.coffee', 'lib/webserver.coffee');
