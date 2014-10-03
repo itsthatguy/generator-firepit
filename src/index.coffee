@@ -54,8 +54,6 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
       done()
     ).bind(@)
 
-  checkDependencies: (obj, deps) ->
-
 
   projectfiles: ->
     @packagesPaths = {
