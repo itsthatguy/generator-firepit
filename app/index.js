@@ -23,7 +23,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
       name: 'name',
       type: 'input',
       message: 'What is the name of your project?',
-      "default": 'Firepit'
+      "default": path.basename(process.cwd())
     });
     this.prompts.push({
       name: 'packages',

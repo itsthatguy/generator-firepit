@@ -1,10 +1,9 @@
 'use strict'
-util = require('util')
-path = require('path')
+util   = require('util')
+path   = require('path')
 yeoman = require('yeoman-generator')
-chalk = require('chalk')
-fs = require('fs')
-
+chalk  = require('chalk')
+fs     = require('fs')
 
 module.exports = FirepitGenerator = yeoman.generators.Base.extend
 
@@ -21,7 +20,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
       name: 'name'
       type: 'input'
       message: 'What is the name of your project?'
-      default: 'Firepit'
+      default: path.basename(process.cwd())
 
     @prompts.push
       name: 'packages'
