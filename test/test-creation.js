@@ -1,36 +1,31 @@
-/*global describe, beforeEach, it */
+/*global describe, beforeEach, it*/
 'use strict';
+
 var path = require('path');
+var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
+var os = require('os');
 
-describe('firepit generator', function () {
-  beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
-      if (err) {
-        return done(err);
-      }
-
-      this.app = helpers.createGenerator('firepit:app', [
-        '../../app'
-      ]);
-      done();
-    }.bind(this));
+describe('firepit:app', function () {
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({
+        'bower': false,
+        'skipInstall': true
+       })
+      .withPrompt({
+        someOption: true
+      })
+      .on('end', done);
   });
 
-  it('creates expected files', function (done) {
-    var expected = [
-      // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
-    ];
-
-    helpers.mockPrompt(this.app, {
-      'someOption': true
-    });
-    this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
-      helpers.assertFile(expected);
-      done();
-    });
+  it('creates files', function () {
+    assert.file([
+      'bower.json',
+      'package.json',
+      '.editorconfig',
+      '.jshintrc'
+    ]);
   });
 });
