@@ -14,8 +14,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "coffee --bare --compile --watch --no-header app/index.coffee "
+    "test": "node_modules/.bin/mocha",
+    "build": "node_modules/.bin/coffee --bare --compile --output app/ src/*.coffee",
+    "prepublish": "node_modules/.bin/coffee --bare --compile --output app/ src/*.coffee"
   },
   "files": [
     "app"
@@ -28,6 +29,7 @@
     "chalk": "~0.4.0"
   },
   "devDependencies": {
+    "coffee-script": "^1.7.1",
     "mocha": "*"
   },
   "peerDependencies": {
