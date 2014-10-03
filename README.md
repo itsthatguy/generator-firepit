@@ -1,4 +1,6 @@
-# Firepit
+# Generator-Firepit
+
+[![Build Status](https://travis-ci.org/itsthatguy/generator-firepit.svg?branch=master)](https://travis-ci.org/itsthatguy/generator-firepit)
 
 Firepit is a Node static site starter project Yeoman Generator. The only reason I say that it is a static site starter project is because it doesn't start out serving anything other than static assets. If you want to add that on, go for it. This is a normal node stack after all.
 
