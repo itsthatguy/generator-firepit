@@ -92,6 +92,8 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @mkdir('lib/')
     @copy('app.coffee', 'app.coffee')
     @copy('lib/webserver.coffee', 'lib/webserver.coffee')
+    @copy('editorconfig', '.editorconfig')
+    @copy('jshintrc', '.jshintrc')
 
     # Front-end app files
     @mkdir('app/')

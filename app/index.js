@@ -92,6 +92,8 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend({
     this.mkdir('lib/');
     this.copy('app.coffee', 'app.coffee');
     this.copy('lib/webserver.coffee', 'lib/webserver.coffee');
+    this.copy('editorconfig', '.editorconfig');
+    this.copy('jshintrc', '.jshintrc');
     this.mkdir('app/');
     this.mkdir('app/css/');
     this.mkdir('app/js/');
