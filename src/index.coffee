@@ -54,8 +54,6 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
       done()
     ).bind(@)
 
-  checkDependencies: (obj, deps) ->
-
 
   projectfiles: ->
     @packagesPaths = {
@@ -107,10 +105,9 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @template('app/js/_app.coffee', 'app/js/app.coffee')
 
 
-  dependencies: ->
-    @.on 'end', ->
-      @installDependencies
-        callback: => @emit('dependenciesInstalled')
+  end: ->
+    @options['callback'] = => @emit('dependenciesInstalled')
+    @installDependencies(@options)
 
     @.on 'dependenciesInstalled', ->
       @log chalk.green("\n# Awesome. Everything generated just fine!\n\n\

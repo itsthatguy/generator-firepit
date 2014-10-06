@@ -14,8 +14,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "coffee --bare --compile --watch --no-header app/index.coffee "
+    "test": "npm run compile && node_modules/.bin/mocha",
+    "compile": "node_modules/.bin/coffee --bare --compile --output app/ src/*.coffee",
+    "prepublish": "npm run compile"
   },
   "files": [
     "app"
@@ -24,10 +25,11 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "~0.16.0",
+    "yeoman-generator": "~0.17.0",
     "chalk": "~0.4.0"
   },
   "devDependencies": {
+    "coffee-script": "^1.7.1",
     "mocha": "*"
   },
   "peerDependencies": {
