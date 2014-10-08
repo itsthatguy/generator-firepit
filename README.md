@@ -36,12 +36,9 @@ npm install -g generator-firepit
 
 
 ## Using Firepit
-*NOTE: I'm assuming you are still in the generator-firepit directory right now.*
-
-Replace `myproject` with whatever you want to name your project.
+Simply run the generator in a new project directory:
 
 ```
-cd ..
 mkdir myproject && cd $_
 yo firepit
 ```
