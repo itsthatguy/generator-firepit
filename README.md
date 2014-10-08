@@ -54,7 +54,7 @@ yo firepit
 1. Run the server: `npm start`
 2. Browse to: `http://localhost:3002`
 
-Assets will automatically be compiled, while the server is running. So all you need to do it run `npm start`.
+Assets will automatically be compiled, while the server is running. So all you need to do is run `npm start`.
 
 
 ### Deploying to heroku
