@@ -36,12 +36,9 @@ npm install -g generator-firepit
 
 
 ## Using Firepit
-*NOTE: I'm assuming you are still in the generator-firepit directory right now.*
-
-Replace `myproject` with whatever you want to name your project.
+Simply run the generator in a new project directory:
 
 ```
-cd ..
 mkdir myproject && cd $_
 yo firepit
 ```
@@ -54,7 +51,7 @@ yo firepit
 1. Run the server: `npm start`
 2. Browse to: `http://localhost:3002`
 
-Assets will automatically be compiled, while the server is running. So all you need to do it run `npm start`.
+Assets will automatically be compiled, while the server is running. So all you need to do is run `npm start`.
 
 
 ### Deploying to heroku
