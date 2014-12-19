@@ -8,8 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/.bin/nodemon start.js",
-    "postinstall": "node postinstall.js"
+    "start": "node_modules/.bin/nodemon start.coffee"
   },
   "author": "",
   "license": "ISC",
@@ -40,14 +39,14 @@
     "nodemon": "^1.2.0",
     "serve-favicon": "^2.0.1",
     "stylus": "^0.42.3",
+    "vinyl-paths": "^1.0.0",
     "win-spawn": "^2.0.0",
-    "run-command": "^0.1.4"
+    "run-command": "^0.1.4",
+    "run-sequence": "^0.3.6"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/itsthatguy/firepit.git"
   },
-  "devDependencies": {
-    "run-sequence": "^0.3.6"
-  }
+  "devDependencies": {}
 }

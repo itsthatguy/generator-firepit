@@ -77,14 +77,14 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     # Root App files
     @template('_README.md', 'README.md')
     @template('_Gulpfile.js', 'Gulpfile.js')
+    @template('_Gulpfile.coffee', 'Gulpfile.coffee')
     @template('_package.json', 'package.json')
     @template('_bower.json', 'bower.json')
     @copy('_.gitignore', '.gitignore')
     @copy('_.env', '.env')
     @copy('Procfile', 'Procfile')
-    @copy('start.js', 'start.js')
+    @copy('start.coffee', 'start.coffee')
     @copy('nodemon.json', 'nodemon.json')
-    @copy('postinstall.js', 'postinstall.js')
     @mkdir('data/')
     @copy('data/config.yaml', 'data/config.yaml')
     @mkdir('lib/')
@@ -103,7 +103,6 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @template('app/_index.html', 'app/index.html')
     @template('app/css/_main.styl', 'app/css/main.styl')
     @template('app/js/_app.coffee', 'app/js/app.coffee')
-
 
   end: ->
     @options['callback'] = => @emit('dependenciesInstalled')
