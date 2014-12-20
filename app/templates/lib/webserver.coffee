@@ -59,5 +59,4 @@ app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
   ext  = req.params[1] ? "html"
   res.render(path.join(generatedPath, "#{path}.#{ext}"))
 
-
 module.exports = app
