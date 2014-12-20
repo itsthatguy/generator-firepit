@@ -57,9 +57,9 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
 
   projectfiles: ->
     @packagesPaths = {
-      "jquery"     : "/jquery/dist/jquery.min.js"
-      "ember"      : "/ember/ember.js"
-      "handlebars" : "/handlebars/handlebars.js"
+      "jquery"     : "/jquery.min.js"
+      "ember"      : "/ember.min.js"
+      "handlebars" : "/handlebars.min.js"
     }
 
     bowerPackageList = {
