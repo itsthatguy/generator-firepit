@@ -21,7 +21,8 @@ app           = express()
 webserver     = http.createServer(app)
 basePath      = path.join(__dirname, '..')
 generatedPath = path.join(basePath, '.generated')
-vendorPath    = path.join(basePath, 'bower_components')
+assetsPath    = path.join(generatedPath, 'assets')
+vendorPath    = path.join(generatedPath, 'vendor')
 faviconPath   = path.join(basePath, 'app', 'favicon.ico')
 
 # Get our data file
@@ -34,7 +35,7 @@ if config.username? || config.password?
 # Configure the express server
 app.engine('.html', require('hbs').__express)
 app.use(favicon(faviconPath))
-app.use('/assets', express.static(generatedPath))
+app.use('/assets', express.static(assetsPath))
 app.use('/vendor', express.static(vendorPath))
 
 # Find an available port
@@ -57,6 +58,5 @@ app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
   path = req.params[0]
   ext  = req.params[1] ? "html"
   res.render(path.join(generatedPath, "#{path}.#{ext}"))
-
 
 module.exports = app
