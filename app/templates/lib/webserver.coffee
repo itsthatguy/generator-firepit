@@ -1,4 +1,3 @@
-
 http      = require('http')
 express   = require('express')
 path      = require('path')
@@ -37,26 +36,36 @@ app.use(favicon(faviconPath))
 app.use('/assets', express.static(generatedPath))
 app.use('/vendor', express.static(vendorPath))
 
-# Find an available port
-port = process.env.PORT || 3002
-if port > 3002
-  webserver.listen(port)
-else
-  findPort port, port + 100, (ports) -> webserver.listen(ports[0])
+defaults =
+  host: 'http://localhost'
+  port: 3002
 
-# Notify the console that we're connected and on what port
-webserver.on 'listening', ->
-  address = webserver.address()
-  console.log "[Firepit] Server running at http://#{address.address}:#{address.port}".green
+server = (options = {}) ->
+  port = process.env.PORT || 3002
+  port = options.port || process.env.PORT || defaults.port
+  host = options.host || process.env.HOST || defaults.host
 
-# Routes
-app.get '/', (req, res) ->
-  res.render(generatedPath + '/index.html', {data: config})
+  env = process.env.NODE_ENV
 
-app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
-  path = req.params[0]
-  ext  = req.params[1] ? "html"
-  res.render(path.join(generatedPath, "#{path}.#{ext}"))
+  # Find an available port
+  if port > 3002
+    webserver.listen(port)
+  else
+    findPort port, port + 100, (ports) ->
+      webserver.listen(ports[0])
 
+  # Notify the console that we're connected and on what port
+  webserver.on 'listening', ->
+    address = webserver.address()
+    console.log "[Firepit] Server running at http://#{address.address}:#{address.port}".green
 
-module.exports = app
+  # Routes
+  app.get '/', (req, res) ->
+    res.render(generatedPath + '/index.html', {data: config})
+
+  app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
+    path = req.params[0]
+    ext  = req.params[1] ? "html"
+    res.render(path.join(generatedPath, "#{path}.#{ext}"))
+
+module.exports = server
