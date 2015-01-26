@@ -76,22 +76,21 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
 
     # Root App files
     @template('_README.md', 'README.md')
-    @template('_Gulpfile.js', 'Gulpfile.js')
-    @template('_Gulpfile.coffee', 'Gulpfile.coffee')
     @template('_package.json', 'package.json')
     @template('_bower.json', 'bower.json')
-    @copy('_.gitignore', '.gitignore')
-    @copy('_.env', '.env')
+    @directory('scripts', 'scripts')
+    @directory('data', 'data')
+    @directory('lib', 'lib')
     @copy('Procfile', 'Procfile')
-    @copy('start.coffee', 'start.coffee')
-    @copy('nodemon.json', 'nodemon.json')
-    @mkdir('data/')
-    @copy('data/config.yaml', 'data/config.yaml')
-    @mkdir('lib/')
+    @copy('_.env', '.env')
+    @copy('_.gitignore', '.gitignore')
     @copy('app.coffee', 'app.coffee')
-    @copy('lib/webserver.coffee', 'lib/webserver.coffee')
-    @copy('editorconfig', '.editorconfig')
-    @copy('jshintrc', '.jshintrc')
+    @copy('nodemon.json', 'nodemon.json')
+    @copy('start.coffee', 'start.coffee')
+
+    # Gulp files
+    @template('_Gulpfile.js', 'Gulpfile.js')
+    @directory('gulp', 'gulp')
 
     # Front-end app files
     @mkdir('app/')
