@@ -54,13 +54,13 @@ describe('firepit:app', function() {
 
   it('creates data/config.yaml file', function() {
     assert.file([
-      'data/config.yaml',
+      'data/config.yaml'
     ]);
   });
 
   it('creates scripts/ files', function() {
     assert.file([
-      'scripts/install_dependencies.sh',
+      'scripts/install_dependencies.sh'
     ]);
   });
 
