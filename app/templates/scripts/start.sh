@@ -4,7 +4,7 @@ source .env;
 echo "[NODE_ENV] ${NODE_ENV}";
 
 if [[ $NODE_ENV == 'development' ]]; then
-  gulp server;
+  $(npm bin)/gulp server;
 else
-  coffee lib/webserver.coffee --start;
+  $(npm bin)/coffee lib/webserver.coffee --start;
 fi
