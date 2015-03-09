@@ -53,7 +53,8 @@
     "stylus": "^0.42.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
-    "win-spawn": "^2.0.0"
+    "win-spawn": "^2.0.0",
+    "yargs": "^3.4.5"
   },
   "repository": {
     "type": "git",

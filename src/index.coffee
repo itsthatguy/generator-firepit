@@ -6,10 +6,8 @@ chalk  = require('chalk')
 fs     = require('fs')
 
 module.exports = FirepitGenerator = yeoman.generators.Base.extend
-
   init: ->
     @prompts = []
-
 
   askFor: ->
     done = @async()
@@ -54,7 +52,6 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
       done()
     ).bind(@)
 
-
   projectfiles: ->
     @packagesPaths = {
       "jquery"     : "/jquery/dist/jquery.min.js"
@@ -86,7 +83,6 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @copy('_.gitignore', '.gitignore')
     @copy('app.coffee', 'app.coffee')
     @copy('nodemon.json', 'nodemon.json')
-    @copy('start.coffee', 'start.coffee')
 
     # Gulp files
     @template('_Gulpfile.js', 'Gulpfile.js')
