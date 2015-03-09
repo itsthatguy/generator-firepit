@@ -70,7 +70,8 @@ server = (options = {}) ->
     res.render(path.join(generatedPath, "#{filepath}.#{ext}"))
 
 # Start the server if run from CLI with the --start flag
-if argv.start
+# or if started from `gulp server`
+if argv.start || process.env.GULP
   console.log "Ye want to start the server, eh?!"
   server()
 

@@ -10,7 +10,7 @@
     "preinstall": "scripts/install_dependencies.sh",
     "pretest": "scripts/compile.sh",
     "test": "./node_modules/.bin/mocha",
-    "start": "node_modules/.bin/nodemon start.coffee"
+    "start": "gulp server"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +34,7 @@
     "gulp-jade": "^0.6.1",
     "gulp-livereload": "^2.1.0",
     "gulp-minify-css": "^0.4.2",
+    "gulp-nodemon": "^1.0.5",
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
     "gulp-sourcemaps": "^1.3.0",
