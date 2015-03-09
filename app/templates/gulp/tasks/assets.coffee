@@ -1,7 +1,5 @@
-paths = require("../paths")
-
 # Static Assets
 gulp.task "assets", ->
-  gulp.src(paths.input.assets, {base: paths.BASE_APP_PATH})
+  gulp.src(config.assets.src, {base: config.BASE_APP_PATH})
     .pipe(plumber())
-    .pipe(gulp.dest(paths.output.assets))
+    .pipe(gulp.dest(config.assets.dest))

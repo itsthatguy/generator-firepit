@@ -1,13 +1,13 @@
 watch = require("gulp-watch")
-paths = require("../paths")
 
 # Watch
 gulp.task "watch", ["default"], ->
-  watch(paths.watch.css,    -> gulp.start("css"))
-  watch(paths.watch.js,     -> gulp.start("js"))
-  watch(paths.watch.assets, -> gulp.start("assets"))
-  watch(paths.watch.ejs,    -> gulp.start("ejs"))
-  watch(paths.watch.jade,   -> gulp.start("jade"))
+  watch(config.css.watch,      -> gulp.start("css"))
+  watch(config.js.watch,       -> gulp.start("js"))
+  watch(config.jsVendor.watch, -> gulp.start("jsVendor"))
+  watch(config.assets.watch,   -> gulp.start("assets"))
+  watch(config.ejs.watch,      -> gulp.start("ejs"))
+  watch(config.jade.watch,     -> gulp.start("jade"))
 
   setupLiveReload() if process.env.NODE_ENV == "development"
 
@@ -26,7 +26,7 @@ setupLiveReload = ->
         msg = "[LiveReload] Now listening on port: " + server.port
         gutil.log msg.green
         livereload.changed()
-      gulp.watch(path.join(paths.BASE_GENERATED_PATH, "**"))
+      gulp.watch(path.join(config.BASE_GENERATED_PATH, "**"))
         .on("error", gutil.log)
         .on("error", gutil.beep)
         .on("change", livereload.changed)

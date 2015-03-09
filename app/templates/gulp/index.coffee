@@ -1,9 +1,9 @@
 global.gulp    = require("gulp")
 global.gutil   = require("gulp-util")
 global.plumber = require("gulp-plumber")
+global.path    = require("path")
+global.config  = require("./config")
 runSequence    = require("run-sequence")
-
-paths        = require("./paths")
 
 assetsTask = require("./tasks/assets")
 cleanTask  = require("./tasks/clean")
@@ -16,4 +16,4 @@ testTask   = require("./tasks/test")
 watchTask  = require("./tasks/watch")
 
 gulp.task "default", (callback) ->
-  runSequence "clean", "css", "js", "assets", "ejs", "jade", callback
+  runSequence "clean", "css", "js", "jsVendor", "assets", "ejs", "jade", callback

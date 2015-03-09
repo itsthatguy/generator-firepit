@@ -102,6 +102,7 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
     @template('app/_index.html', 'app/index.html')
     @template('app/css/_main.styl', 'app/css/main.styl')
     @template('app/js/_app.coffee', 'app/js/app.coffee')
+    @copy('app/js/vendor.coffee', 'app/js/vendor.coffee')
 
   end: ->
     @options['callback'] = => @emit('dependenciesInstalled')

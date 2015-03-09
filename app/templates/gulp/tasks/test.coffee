@@ -1,8 +1,6 @@
-paths = require('../paths')
-
 gulp.task 'test', ->
   # Be sure to return the stream
-  gulp.src(paths.input.test)
+  gulp.src(config.test.src)
     .pipe(plumber())
     .pipe(karma(
       configFile: 'karma.conf.js',

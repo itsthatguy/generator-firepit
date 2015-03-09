@@ -61,5 +61,26 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "zombie": "^2.5.1"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "jquery": "./bower_components/jquery/dist/jquery.js",
+    "handlebars": "./bower_components/handlebars/handlebars.js",
+    "ember": "./bower_components/ember/ember.js"
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "handlebars": "Handlebars",
+    "ember": {
+      "exports": "Ember",
+      "depends": [
+        "jquery:$",
+        "handlebars:Handlebars"
+      ]
+    }
   }
 }

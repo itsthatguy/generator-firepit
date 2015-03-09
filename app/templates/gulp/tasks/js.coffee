@@ -5,40 +5,54 @@ source     = require('vinyl-source-stream')
 sourcemaps = require('gulp-sourcemaps')
 uglify     = require('gulp-uglify')
 
-paths = require('../paths')
-
 # Task
 gulp.task 'js', ->
-  jsStream = browserify(paths.input.js.src, {
+  jsStream = browserify(config.js.src, {
     extensions: ['.coffee']
     debug: true
-  }).require(paths.input.js.vendor)
-    .transform('coffeeify')
+  }).transform('coffeeify')
     .bundle()
-    .on('error', gutil.log)
-    .on('error', gutil.beep)
 
   # standard code
   jsStream
     .pipe(plumber())
-    .pipe(source(paths.input.js.src[0]))
+    .pipe(source(config.js.src))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(rename('app.js'))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.output.js))
+    .pipe(gulp.dest(config.js.dest))
 
   # minified code
   jsStream
     .pipe(plumber())
-    .pipe(source(paths.input.js.src[0]))
+    .pipe(source(config.js.src))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(uglify({ compress: { negate_iife: false }})
-      .on('error', gutil.log)
-      .on('error', gutil.beep))
+    .pipe(uglify({ compress: { negate_iife: false }}))
     .pipe(rename('app.min.js'))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.output.js))
+    .pipe(gulp.dest(config.js.dest))
 
   return jsStream
+
+# Vendor assets for JS
+gulp.task 'jsVendor', ->
+  jsVendorStream = browserify(config.jsVendor.src, {
+    extensions: ['.coffee']
+    debug: true
+  }).transform("browserify-shim")
+    .bundle()
+
+  # standard code
+  jsVendorStream
+    .pipe(plumber())
+    .pipe(source(config.jsVendor.src))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(rename('vendor.js'))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(config.jsVendor.dest))
+
+  return jsVendorStream
+

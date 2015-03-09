@@ -64,8 +64,8 @@ server = (options = {}) ->
     res.render(generatedPath + '/index.html', {data: config})
 
   app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
-    path = req.params[0]
-    ext  = req.params[1] ? "html"
-    res.render(path.join(generatedPath, "#{path}.#{ext}"))
+    filepath = req.params[0]
+    ext      = req.params[1] ? "html"
+    res.render(path.join(generatedPath, "#{filepath}.#{ext}"))
 
 module.exports = server
