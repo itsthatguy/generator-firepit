@@ -1,7 +1,7 @@
 config                     = {}
 config.ROOT_PATH           = path.join(__dirname, '..')
 config.BASE_APP_PATH       = path.join(config.ROOT_PATH, 'app')
-config.BASE_LIB_PATH       = path.join(__dirname, '..', 'lib')
+config.BASE_LIB_PATH       = path.join(config.ROOT_PATH, 'lib')
 config.BASE_GENERATED_PATH = path.join(config.ROOT_PATH, '.generated')
 # config.BASE_TEMPLATES_PATH = path.join(config.BASE_APP_ASSETS_PATH, 'templates')
 

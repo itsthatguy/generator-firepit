@@ -1,3 +1,3 @@
 require('jquery')
-require('handlebars')
-require('ember')
+# require('handlebars')
+# require('ember')
