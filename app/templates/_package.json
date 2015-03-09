@@ -7,8 +7,9 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "preinstall": "scripts/install_dependencies.sh",
-    "pretest": "scripts/compile.sh",
+    "preinstall": "bash ./scripts/install_dependencies.sh",
+    "postinstall": "bash ./scripts/postinstall.sh",
+    "pretest": "bash ./scripts/compile.sh",
     "test": "./node_modules/.bin/mocha",
     "start": "gulp server"
   },
