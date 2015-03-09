@@ -32,8 +32,7 @@ describe('firepit:app', function() {
       'bower.json',
       'package.json',
       'README.md',
-      'Procfile',
-      'start.coffee'
+      'Procfile'
     ]);
   });
 
@@ -60,7 +59,9 @@ describe('firepit:app', function() {
 
   it('creates scripts/ files', function() {
     assert.file([
-      'scripts/install_dependencies.sh'
+      'scripts/install_dependencies.sh',
+      'scripts/start.sh',
+      'scripts/postinstall.sh'
     ]);
   });
 
@@ -68,13 +69,14 @@ describe('firepit:app', function() {
     assert.file([
       'Gulpfile.js',
       'gulp/index.coffee',
-      'gulp/paths.coffee',
+      'gulp/config.coffee',
       'gulp/tasks/assets.coffee',
       'gulp/tasks/clean.coffee',
       'gulp/tasks/css.coffee',
       'gulp/tasks/ejs.coffee',
       'gulp/tasks/jade.coffee',
       'gulp/tasks/js.coffee',
+      'gulp/tasks/js-vendor.coffee',
       'gulp/tasks/server.coffee',
       'gulp/tasks/test.coffee',
       'gulp/tasks/watch.coffee'
