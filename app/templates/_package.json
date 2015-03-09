@@ -7,10 +7,11 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "preinstall": "scripts/install_dependencies.sh",
-    "pretest": "scripts/compile.sh",
+    "preinstall": "bash ./scripts/install_dependencies.sh",
+    "postinstall": "bash ./scripts/postinstall.sh",
+    "pretest": "bash ./scripts/compile.sh",
     "test": "./node_modules/.bin/mocha",
-    "start": "node_modules/.bin/nodemon start.coffee"
+    "start": "gulp server"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +35,7 @@
     "gulp-jade": "^0.6.1",
     "gulp-livereload": "^2.1.0",
     "gulp-minify-css": "^0.4.2",
+    "gulp-nodemon": "^1.0.5",
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
     "gulp-sourcemaps": "^1.3.0",
@@ -53,7 +55,8 @@
     "stylus": "^0.42.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
-    "win-spawn": "^2.0.0"
+    "win-spawn": "^2.0.0",
+    "yargs": "^3.4.5"
   },
   "repository": {
     "type": "git",

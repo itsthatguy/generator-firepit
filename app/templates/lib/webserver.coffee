@@ -7,6 +7,7 @@ colors    = require('colors')
 basicAuth = require('basic-auth-connect')
 fs        = require('fs')
 yaml      = require('js-yaml')
+argv      = require('yargs').argv
 
 # Function to load files from our data folder
 getDataFile = (file) ->
@@ -42,8 +43,8 @@ defaults =
 
 server = (options = {}) ->
   port = process.env.PORT || 3002
-  port = options.port || process.env.PORT || defaults.port
-  host = options.host || process.env.HOST || defaults.host
+  port = argv.port || options.port || process.env.PORT || defaults.port
+  host = argv.host || options.host || process.env.HOST || defaults.host
 
   env = process.env.NODE_ENV
 
@@ -67,5 +68,11 @@ server = (options = {}) ->
     filepath = req.params[0]
     ext      = req.params[1] ? "html"
     res.render(path.join(generatedPath, "#{filepath}.#{ext}"))
+
+# Start the server if run from CLI with the --start flag
+# or if started from `gulp server`
+if argv.start || process.env.GULP
+  console.log "Ye want to start the server, eh?!"
+  server()
 
 module.exports = server

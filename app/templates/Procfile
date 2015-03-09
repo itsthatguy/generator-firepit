@@ -1,1 +1,1 @@
-web: coffee start.coffee
+web: coffee scripts/start.sh

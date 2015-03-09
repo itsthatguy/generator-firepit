@@ -1,7 +1,7 @@
-serverFile = path.join(config.BASE_LIB_PATH, 'webserver')
+nodemon = require("gulp-nodemon")
 
-coffee = require('coffee-script/register')
-server = require(serverFile)
+nodemonConfig = require(path.join(config.ROOT_PATH, 'nodemon.json'))
+nodemonConfig.env.GULP = true
 
 # Server
-gulp.task 'server', ['watch'], -> server({port: 3002})
+gulp.task 'server', ['watch'], -> nodemon(nodemonConfig)
