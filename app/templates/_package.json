@@ -4,22 +4,22 @@
   "description": "",
   "main": "index.coffee",
   "engines": {
-    "node": "0.10.x"
+    "node": "0.12.x"
   },
   "scripts": {
     "preinstall": "bash ./scripts/install_dependencies.sh",
-    "postinstall": "bash ./scripts/postinstall.sh",
+    "postinstall": "coffee ./scripts/postinstall.coffee",
     "pretest": "bash ./scripts/compile.sh",
     "test": "./node_modules/.bin/mocha",
-    "start": "gulp server"
+    "start": "coffee ./scripts/start.coffee"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
+    "bower": "^1.3.2",
     "browserify": "^6.2.0",
     "browserify-shim": "^3.8.3",
-    "chai": "^1.9.1",
     "coffee-script": "^1.7.1",
     "coffeeify": "^0.6.0",
     "colors": "^0.6.2",
@@ -30,6 +30,7 @@
     "find-port": "^1.0.0",
     "gulp": "^3.8.10",
     "gulp-browserify": "^0.5.0",
+    "gulp-clean": "^0.3.1",
     "gulp-coffee": "^1.4.3",
     "gulp-ejs": "^0.2.2",
     "gulp-jade": "^0.6.1",
@@ -47,9 +48,8 @@
     "js-yaml": "^3.0.2",
     "marked": "^0.3.2",
     "media-typer": "^0.2.0",
-    "mocha": "^1.18.2",
     "nodemon": "^1.2.0",
-    "run-command": "^0.2.4",
+    "run-command": "^1.0.1",
     "run-sequence": "^0.3.6",
     "serve-favicon": "^2.0.1",
     "stylus": "^0.42.3",
@@ -72,7 +72,6 @@
     ]
   },
   "browser": {
-    <%= props.packages %>
     <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'jquery')) { %>
     "jquery": "./bower_components/jquery/dist/jquery.js",
     <% } %>

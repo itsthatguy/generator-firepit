@@ -27,7 +27,6 @@ setupLiveReload = ->
         msg = "[LiveReload] Now listening on port: " + server.port
         gutil.log msg.green
         livereload.changed()
-      watch(path.join(config.BASE_GENERATED_PATH, "**", "*"), ->
+      watch path.join(config.BASE_GENERATED_PATH, "**", "*"), ->
         livereload.changed()
-      ).pipe(plumber())
     return
