@@ -58,13 +58,13 @@
     "win-spawn": "^2.0.0",
     "yargs": "^3.4.5"
   },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.18.2"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/itsthatguy/firepit.git"
-  },
-  "devDependencies": {
-    "bower": "^1.3.2",
-    "zombie": "^2.5.1"
   },
   "browserify": {
     "transform": [
@@ -72,13 +72,25 @@
     ]
   },
   "browser": {
+    <%= props.packages %>
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'jquery')) { %>
     "jquery": "./bower_components/jquery/dist/jquery.js",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'handlebars')) { %>
     "handlebars": "./bower_components/handlebars/handlebars.js",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember')) { %>
     "ember": "./bower_components/ember/ember.js"
+    <% } %>
   },
   "browserify-shim": {
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'jquery')) { %>
     "jquery": "$",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'handlebars')) { %>
     "handlebars": "Handlebars",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember')) { %>
     "ember": {
       "exports": "Ember",
       "depends": [
@@ -86,5 +98,6 @@
         "handlebars:Handlebars"
       ]
     }
+    <% } %>
   }
 }
