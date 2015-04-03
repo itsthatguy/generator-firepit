@@ -3,7 +3,7 @@ nodemonConfig = require(path.join(config.ROOT_PATH, 'nodemon.json'))
 
 # Watch
 gulp.task "watch", ["default"], ->
-  watch(config.css.watch,      -> gulp.start("css"))
+  watch(config.stylus.watch,   -> gulp.start("stylus"))
   watch(config.js.watch,       -> gulp.start("js"))
   watch(config.jsVendor.watch, -> gulp.start("jsVendor"))
   watch(config.assets.watch,   -> gulp.start("assets"))

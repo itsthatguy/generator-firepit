@@ -7,7 +7,7 @@ config.BASE_GENERATED_PATH = path.join(config.ROOT_PATH, '.generated')
 
 config.clean = path.join(config.BASE_GENERATED_PATH, "**", "*")
 
-config.css =
+config.stylus =
   src: path.join(config.BASE_APP_PATH, "css", "main.styl")
   dest: config.BASE_GENERATED_PATH
   watch: path.join(config.BASE_APP_PATH, "css", "**", "*.styl*")
@@ -15,7 +15,10 @@ config.css =
 config.js =
   src: path.join(config.BASE_APP_PATH, "js", "app.coffee")
   dest: path.join(config.BASE_GENERATED_PATH, 'js')
-  watch: path.join(config.BASE_APP_PATH, "js", "**", "*.coffee")
+  watch: [
+    path.join(config.BASE_APP_PATH, "js", "**", "*.{coffee,js}")
+    path.join("!#{config.BASE_APP_PATH}", "js", "vendor.coffee")
+  ]
 
 config.jsVendor =
   src: path.join(config.BASE_APP_PATH, "js", "vendor.coffee")
