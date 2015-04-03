@@ -90,15 +90,16 @@ module.exports = FirepitGenerator = yeoman.generators.Base.extend
 
     # Front-end app files
     @mkdir('app/')
-    @mkdir('app/css/')
-    @mkdir('app/js/')
-    @mkdir('app/img/')
-    @mkdir('app/fonts/')
+    @mkdir('app/assets/')
+    @mkdir('app/assets/css/')
+    @mkdir('app/assets/js/')
+    @mkdir('app/assets/img/')
+    @mkdir('app/assets/fonts/')
     @copy('app/favicon.ico', 'app/favicon.ico')
     @template('app/_index.html', 'app/index.html')
-    @template('app/css/_main.styl', 'app/css/main.styl')
-    @template('app/js/_app.coffee', 'app/js/app.coffee')
-    @copy('app/js/vendor.coffee', 'app/js/vendor.coffee')
+    @template('app/assets/css/_main.styl', 'app/assets/css/main.styl')
+    @template('app/assets/js/_app.coffee', 'app/assets/js/app.coffee')
+    @copy('app/assets/js/vendor.coffee', 'app/assets/js/vendor.coffee')
 
   end: ->
     @options['callback'] = => @emit('dependenciesInstalled')

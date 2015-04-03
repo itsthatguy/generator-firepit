@@ -7,17 +7,15 @@ var helpers = require('yeoman-generator').test;
 var os      = require('os');
 
 describe('firepit:app', function() {
+
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(os.tmpdir(), './temp-test'))
-      .withOptions({
-        'bower': false,
-        'skipInstall': true
-       })
-      .withPrompt({
-        someOption: true
-      })
-      .on('end', done);
+    .inDir(path.join(os.tmpdir(), './temp-test'))
+    .withOptions({
+      'bower': false,
+      'skipInstall': true
+     })
+    .on('end', done);
   });
 
   it('creates dotfiles', function() {
@@ -45,8 +43,8 @@ describe('firepit:app', function() {
   it('creates app/ files', function() {
     assert.file([
       'app/index.html',
-      'app/js/app.coffee',
-      'app/css/main.styl',
+      'app/assets/js/app.coffee',
+      'app/assets/css/main.styl',
       'app/favicon.ico'
     ]);
   });
@@ -60,8 +58,8 @@ describe('firepit:app', function() {
   it('creates scripts/ files', function() {
     assert.file([
       'scripts/install_dependencies.sh',
-      'scripts/start.sh',
-      'scripts/postinstall.sh'
+      'scripts/start.coffee',
+      'scripts/postinstall.coffee'
     ]);
   });
 
@@ -72,7 +70,7 @@ describe('firepit:app', function() {
       'gulp/config.coffee',
       'gulp/tasks/assets.coffee',
       'gulp/tasks/clean.coffee',
-      'gulp/tasks/css.coffee',
+      'gulp/tasks/stylus.coffee',
       'gulp/tasks/ejs.coffee',
       'gulp/tasks/jade.coffee',
       'gulp/tasks/js.coffee',
