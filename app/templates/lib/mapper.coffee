@@ -21,7 +21,7 @@ mapper =
     filepath = filepath.replace(/(^\/|\/$)/g, '')
     split = filepath.split(path.sep)
 
-    map = filetree
+    map = obj
     map = map[item] for item in split
 
     if typeof map == 'object'
