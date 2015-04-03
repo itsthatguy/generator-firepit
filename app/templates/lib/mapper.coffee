@@ -7,7 +7,6 @@ mapper =
     files = fs.readdirSync(filepath)
     for file in files
       target = filepath + '/' + file
-      console.log target
 
       stats = fs.statSync(target)
       if (stats.isFile())
