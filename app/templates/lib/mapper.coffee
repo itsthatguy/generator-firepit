@@ -1,27 +1,28 @@
 path      = require('path')
 fs        = require('fs')
 
-obj = {}
 mapper =
-  buildTree: (filepath) ->
+  buildTree: (filepath, obj) ->
+    obj = obj || {}
     files = fs.readdirSync(filepath)
     for file in files
       target = filepath + '/' + file
+      console.log target
 
       stats = fs.statSync(target)
       if (stats.isFile())
         obj[path.parse(file).name] = target
-
       else if (stats.isDirectory())
         obj[file] = {}
         this.buildTree(target, obj[file])
+
     return obj
 
-  getPath: (filepath) ->
+  getPath: (filepath, tree) ->
     filepath = filepath.replace(/(^\/|\/$)/g, '')
     split = filepath.split(path.sep)
 
-    map = obj
+    map = tree
     map = map[item] for item in split
 
     if typeof map == 'object'

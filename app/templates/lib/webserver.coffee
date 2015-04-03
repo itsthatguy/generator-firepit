@@ -73,7 +73,7 @@ server = (options = {}) ->
     res.render(generatedPath + '/index.html', {data: config})
 
   app.get '*', (req, res) ->
-    filepath = mapper.getPath(req.originalUrl)
+    filepath = mapper.getPath(req.originalUrl, filetree)
 
     res.render(filepath)
 
