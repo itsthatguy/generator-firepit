@@ -1,1 +1,1 @@
-web: coffee scripts/start.coffee
+web: gulp server --production

@@ -58,7 +58,6 @@ describe('firepit:app', function() {
   it('creates scripts/ files', function() {
     assert.file([
       'scripts/install_dependencies.sh',
-      'scripts/start.coffee',
       'scripts/postinstall.coffee'
     ]);
   });
@@ -69,6 +68,7 @@ describe('firepit:app', function() {
       'gulp/index.coffee',
       'gulp/config.coffee',
       'gulp/tasks/assets.coffee',
+      'gulp/tasks/bower.coffee',
       'gulp/tasks/clean.coffee',
       'gulp/tasks/stylus.coffee',
       'gulp/tasks/ejs.coffee',
