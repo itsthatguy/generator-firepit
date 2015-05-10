@@ -49,7 +49,7 @@ config.assets =
   src: [
     path.join(config.BASE_ASSETS_PATH, "img", "**", "*")
     path.join(config.BASE_ASSETS_PATH, "fonts", "**", "*")
-    path.join(config.BASE_ASSETS_PATH, "**", "*.html")
+    path.join(config.BASE_APP_PATH, "**", "*.html")
   ]
   dest: config.BASE_GENERATED_PATH
   watch: [
