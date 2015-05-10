@@ -26,8 +26,9 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "~0.17.0",
-    "chalk": "~0.4.0"
+    "chalk": "~0.4.0",
+    "sumi-e": "0.0.3",
+    "yeoman-generator": "~0.17.0"
   },
   "devDependencies": {
     "coffee-script": "^1.7.1",

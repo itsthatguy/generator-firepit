@@ -8,6 +8,7 @@ basicAuth = require('basic-auth-connect')
 fs        = require('fs')
 yaml      = require('js-yaml')
 argv      = require('yargs').argv
+mapper    = require('./mapper')
 
 # Function to load files from our data folder
 getDataFile = (file) ->
@@ -21,8 +22,12 @@ app           = express()
 webserver     = http.createServer(app)
 basePath      = path.join(__dirname, '..')
 generatedPath = path.join(basePath, '.generated')
+assetsPath    = path.join(generatedPath, 'assets')
 vendorPath    = path.join(basePath, 'bower_components')
 faviconPath   = path.join(basePath, 'app', 'favicon.ico')
+
+# Build our map of files
+filetree = mapper.buildTree(generatedPath)
 
 # Get our data file
 config       = getDataFile('config.yaml')
@@ -31,11 +36,6 @@ config       = getDataFile('config.yaml')
 if config.username? || config.password?
   app.use(basicAuth(config.username, config.password)) if process.env.DYNO?
 
-# Configure the express server
-app.engine('.html', require('hbs').__express)
-app.use(favicon(faviconPath))
-app.use('/assets', express.static(generatedPath))
-app.use('/vendor', express.static(vendorPath))
 
 defaults =
   host: 'http://localhost'
@@ -60,14 +60,22 @@ server = (options = {}) ->
     address = webserver.address()
     console.log "[Firepit] Server running at http://#{address.address}:#{address.port}".green
 
+
+  # Configure the express server
+  app.engine('html', require('hbs').__express)
+  app.set('view engine', 'html')
+  app.use(favicon(faviconPath))
+  app.use('/assets', express.static(assetsPath))
+  app.use('/vendor', express.static(vendorPath))
+
   # Routes
   app.get '/', (req, res) ->
     res.render(generatedPath + '/index.html', {data: config})
 
-  app.get /^\/(\w+)(?:\.)?(\w+)?/, (req, res) ->
-    filepath = req.params[0]
-    ext      = req.params[1] ? "html"
-    res.render(path.join(generatedPath, "#{filepath}.#{ext}"))
+  app.get '*', (req, res) ->
+    filepath = mapper.getPath(req.originalUrl, filetree)
+
+    res.render(filepath)
 
 # Start the server if run from CLI with the --start flag
 # or if started from `gulp server`

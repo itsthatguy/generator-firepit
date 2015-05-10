@@ -4,22 +4,22 @@
   "description": "",
   "main": "index.coffee",
   "engines": {
-    "node": "0.10.x"
+    "node": "0.12.x"
   },
   "scripts": {
     "preinstall": "bash ./scripts/install_dependencies.sh",
-    "postinstall": "bash ./scripts/postinstall.sh",
+    "postinstall": "coffee ./scripts/postinstall.coffee",
     "pretest": "bash ./scripts/compile.sh",
     "test": "./node_modules/.bin/mocha",
-    "start": "gulp server"
+    "start": "./node_modules/.bin/gulp server --development"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
+    "bower": "^1.4.0",
     "browserify": "^6.2.0",
     "browserify-shim": "^3.8.3",
-    "chai": "^1.9.1",
     "coffee-script": "^1.7.1",
     "coffeeify": "^0.6.0",
     "colors": "^0.6.2",
@@ -29,7 +29,7 @@
     "express": "^4.0.0",
     "find-port": "^1.0.0",
     "gulp": "^3.8.10",
-    "gulp-browserify": "^0.5.0",
+    "gulp-bower": "0.0.10",
     "gulp-coffee": "^1.4.3",
     "gulp-ejs": "^0.2.2",
     "gulp-jade": "^0.6.1",
@@ -39,32 +39,30 @@
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
     "gulp-sourcemaps": "^1.3.0",
-    "gulp-stylus": "^0.1.0",
+    "gulp-stylus": "^2.0.1",
     "gulp-uglify": "^1.1.0",
     "gulp-util": "^2.2.14",
     "gulp-watch": "^4.1.0",
     "hbs": "^2.7.0",
     "js-yaml": "^3.0.2",
     "marked": "^0.3.2",
-    "media-typer": "^0.2.0",
-    "mocha": "^1.18.2",
-    "nodemon": "^1.2.0",
-    "run-command": "^0.2.4",
+    "nodemon": "^1.3.7",
+    "run-command": "^1.0.1",
     "run-sequence": "^0.3.6",
     "serve-favicon": "^2.0.1",
     "stylus": "^0.42.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "win-spawn": "^2.0.0",
-    "yargs": "^3.4.5"
+    "yargs": "^3.7.0"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.18.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/itsthatguy/firepit.git"
-  },
-  "devDependencies": {
-    "bower": "^1.3.2",
-    "zombie": "^2.5.1"
   },
   "browserify": {
     "transform": [
@@ -72,13 +70,24 @@
     ]
   },
   "browser": {
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'jquery')) { %>
     "jquery": "./bower_components/jquery/dist/jquery.js",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'handlebars')) { %>
     "handlebars": "./bower_components/handlebars/handlebars.js",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember')) { %>
     "ember": "./bower_components/ember/ember.js"
+    <% } %>
   },
   "browserify-shim": {
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'jquery')) { %>
     "jquery": "$",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember') || _.contains(props.packages, 'handlebars')) { %>
     "handlebars": "Handlebars",
+    <% } %>
+    <% if (_.contains(props.packages, 'ember')) { %>
     "ember": {
       "exports": "Ember",
       "depends": [
@@ -86,5 +95,6 @@
         "handlebars:Handlebars"
       ]
     }
+    <% } %>
   }
 }

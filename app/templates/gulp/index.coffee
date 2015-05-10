@@ -7,7 +7,7 @@ runSequence    = require("run-sequence")
 
 assetsTask   = require("./tasks/assets")
 cleanTask    = require("./tasks/clean")
-cssTask      = require("./tasks/css")
+stylusTask   = require("./tasks/stylus")
 ejsTask      = require("./tasks/ejs")
 jadeTask     = require("./tasks/jade")
 jsTask       = require("./tasks/js")
@@ -17,4 +17,4 @@ testTask     = require("./tasks/test")
 watchTask    = require("./tasks/watch")
 
 gulp.task "default", (callback) ->
-  runSequence "clean", "css", "js", "jsVendor", "assets", "ejs", "jade", callback
+  runSequence "clean", "stylus", "js", "jsVendor", "assets", "ejs", "jade", callback
